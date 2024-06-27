@@ -1,0 +1,42 @@
+.navbar {
+    background-color: #343a40; /* Color de fondo de la barra de navegación */
+  }
+
+  .navbar-brand {
+    color: white; /* Color del texto de la marca */
+  }
+
+  #navbar-custom .navbar-toggler-icon {
+    color: white; /* Cambia el color del icono a blanco */
+  }
+  .navbar-nav {
+    margin-left: auto; /* Mueve los elementos restantes a la izquierda */
+  }
+
+  .navbar-nav .nav-link {
+    color: white; /* Cambia el color del texto a blanco */
+  }
+
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .toggle-button {
+    display: inline-flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: unset;
+    right: 12px;
+    cursor: pointer;
+  }
+  
+  .eye-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .custom-button {
+    background-color: rgb(241, 241, 241);
+    color: #343a40;
+  }

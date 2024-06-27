@@ -1,0 +1,62 @@
+/* game.css */
+
+.game-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .btn-opciones button {
+    margin: 0px 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  
+  #game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #game-timer {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  #game-words {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  #word-input {
+    font-size: 24px;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .keyboard {
+    margin-top: 20px;
+  }
+  
+  .char-key,
+  .space-key,
+  .delete-key,
+  .clear-key {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .green {
+    background-color: green;
+  }
+  
+  .blue {
+    background-color: blue;
+  }
+  
+  /* Añade más estilos para los colores restantes según sea necesario */
+  
