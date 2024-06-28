@@ -20,16 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 import uis.edu.entornos.PhoneticsPro.modelo.Attempt;
 import uis.edu.entornos.PhoneticsPro.servicio.AttemptServicio;
 
+//Swagger
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/Attempt")
+@Api(value = "Registro de intentos", tags={"Intentos"})  // Swagger
 public class AttemptControlador {
-    
+     
     @Autowired
     AttemptServicio attemptServicio;
     
     //Listar
+    @ApiOperation(value = "Ver lista de intentos", response = List.class)
     @GetMapping("/list")
     public List<Attempt> listarAttempt(){
         return attemptServicio.getAttempt();
@@ -37,12 +42,14 @@ public class AttemptControlador {
     
     
     //Buscar por ID
+    @ApiOperation(value="Obtener un intento por el ID", response = Attempt.class)
     @GetMapping("/list/{id}")
     public Attempt buscarPorId(@PathVariable Long id){
         return attemptServicio.buscarAttempt(id);
     }
     
     //Crear
+    @ApiOperation(value="Crear un nuevo intento", response = Attempt.class)
     @PostMapping("/")
     public ResponseEntity<Attempt> agregar(@RequestBody Attempt attempt){
         Attempt obj = attemptServicio.nuevoAttempt(attempt);
@@ -50,6 +57,7 @@ public class AttemptControlador {
     }
     
     //Actualizar
+    @ApiOperation(value = "Actualizar un intento existente", response = Attempt.class)
     @PutMapping("/")
     public ResponseEntity<Attempt> actualizar(@RequestBody Attempt attempt){
         Attempt obj = attemptServicio.buscarAttempt(attempt.getId_attempt());
@@ -65,6 +73,7 @@ public class AttemptControlador {
     }
     
     //Borrar
+    @ApiOperation(value = "Borrar un intento por su ID", response = ResponseEntity.class)
     @DeleteMapping("/{id}")
     public ResponseEntity<Attempt> borrar(@PathVariable Long id){
         Attempt obj = attemptServicio.buscarAttempt(id);

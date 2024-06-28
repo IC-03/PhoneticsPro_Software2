@@ -21,28 +21,36 @@ import uis.edu.entornos.PhoneticsPro.modelo.LoginDto;
 import uis.edu.entornos.PhoneticsPro.modelo.Users;
 import uis.edu.entornos.PhoneticsPro.servicio.UsersServicio;
 
+//Swagger
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/Users")
+@Api(value = "Users API", tags = {"Usuarios"}) //swagger
 public class UsersControlador {
     
     @Autowired
     UsersServicio usersServicio;
     
     //Listar
+    @ApiOperation(value = "Listar todos los usuarios", response = List.class) //swagger
     @GetMapping("/list")
     public List<Users> listarUsers(){
         return usersServicio.getUser();
     }
     
     //Buscar por ID
+    @ApiOperation(value = "Buscar usuario por ID", response = Users.class)
     @GetMapping("/list/{id}")
     public Users buscarPorId(@PathVariable Long id){
         return usersServicio.buscarUser(id);
     }
     
     //Crear
+    @ApiOperation(value = "Crear un nuevo usuario", response = Users.class)
     @PostMapping("/")
     public ResponseEntity<Users> agregar(@RequestBody Users user){
         Users obj = usersServicio.nuevoUser(user);
@@ -52,6 +60,7 @@ public class UsersControlador {
     
     
     //Actualizar
+    @ApiOperation(value = "Actualizar un usuario existente", response = Users.class)
     @PutMapping("/")
     public ResponseEntity<Users> actualizar(@RequestBody Users user){
         Users obj = usersServicio.buscarUser(user.getId_user());
@@ -69,6 +78,7 @@ public class UsersControlador {
     
     
     //Borrar
+    @ApiOperation(value = "Borrar un usuario por ID", response = Users.class)
     @DeleteMapping("/{id}")
     public ResponseEntity<Users> borrar(@PathVariable Long id){
         Users obj = usersServicio.buscarUser(id);
@@ -81,11 +91,13 @@ public class UsersControlador {
     }
     
     //Validar Login
+    @ApiOperation(value = "Validar login de cliente", response = Integer.class)
     @PostMapping("/loginclient")
     public int login(@RequestBody LoginDto user){
         return usersServicio.login(user);
     }
     
+    @ApiOperation(value = "Login de usuario", response = ResponseEntity.class)
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDto user){
         return usersServicio.ingresar(user);
