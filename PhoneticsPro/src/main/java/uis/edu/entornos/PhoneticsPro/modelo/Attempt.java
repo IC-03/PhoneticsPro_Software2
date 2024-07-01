@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = Attempt.TABLE_NAME)
 public class Attempt {
-    public static final String TABLE_NAME="Attempt";
+    public static final String TABLE_NAME="attempt";
     
     //Atributos
     @Id

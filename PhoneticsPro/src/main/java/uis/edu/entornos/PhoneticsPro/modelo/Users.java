@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = Users.TABLE_NAME)
 public class Users {
-    public static final String TABLE_NAME="Users";
+    public static final String TABLE_NAME="users";
     
     // atributos
     @Id

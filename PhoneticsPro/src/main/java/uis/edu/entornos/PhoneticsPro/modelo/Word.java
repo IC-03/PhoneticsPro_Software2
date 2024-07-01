@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = Word.TABLE_NAME)
 public class Word {
-    public static final String TABLE_NAME="Word";
+    public static final String TABLE_NAME="word";
     
     //Atributos
     @Id

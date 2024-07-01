@@ -29,7 +29,7 @@ const Attempts = () => {
   useEffect(() => {
     const fetchAndCombineAttempts = async () => {
       try {
-        const response = await fetch("http://localhost:8094/api/Attempt/list");
+        const response = await fetch("http://34.16.128.99:8094/api/Attempt/list");
         const data = await response.json();
 
         const filteredData = data.filter(

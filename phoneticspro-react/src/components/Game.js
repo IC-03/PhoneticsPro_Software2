@@ -34,7 +34,7 @@ const Game = () => {
   useEffect(() => {
     const fetchWords = async () => {
       try {
-        const response = await fetch("http://localhost:8094/api/Word/list");
+        const response = await fetch("http://34.16.128.99:8094/api/Word/list");
         const data = await response.json();
         const term = data.map((palabra) => palabra.term);
         setWords(term);

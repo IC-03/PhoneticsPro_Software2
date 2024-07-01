@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `phoneticsPro` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci */;
-USE `phoneticsPro`;
+-- CREATE DATABASE IF NOT EXISTS `phoneticsPro` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci */;
+USE `phoneticspro`;
 
 CREATE TABLE users (
     id_user INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
