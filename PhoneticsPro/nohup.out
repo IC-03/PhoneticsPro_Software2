@@ -647,3 +647,85 @@ org.hibernate.TransientPropertyValueException: object references an unsaved tran
 2024-07-01 19:55:24.806 DEBUG 36081 --- [nio-8094-exec-2] org.hibernate.SQL                        : select word0_.id_word as id_word1_2_, word0_.term as term2_2_, word0_.transcription as transcri3_2_ from word word0_
 2024-07-01 20:01:04.838 DEBUG 36081 --- [nio-8094-exec-4] org.hibernate.SQL                        : select word0_.id_word as id_word1_2_, word0_.term as term2_2_, word0_.transcription as transcri3_2_ from word word0_
 2024-07-01 20:01:04.975 DEBUG 36081 --- [nio-8094-exec-5] org.hibernate.SQL                        : select word0_.id_word as id_word1_2_, word0_.term as term2_2_, word0_.transcription as transcri3_2_ from word word0_
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36muis.edu.entornos:PhoneticsPro[0;1m >--------------------[m
+[[1;34mINFO[m] [1mBuilding PhoneticsPro 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m>>> [0;32mspring-boot-maven-plugin:2.7.10:run[m [1m(default-cli)[0;1m > [0;1mtest-compile[m @ [36mPhoneticsPro[0;1m >>>[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.2.0:resources[m [1m(default-resources)[m @ [36mPhoneticsPro[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] Copying 1 resource
+[[1;34mINFO[m] Copying 0 resource
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:compile[m [1m(default-compile)[m @ [36mPhoneticsPro[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 18 source files to /home/yeferson/PhoneticsPro_Software2/PhoneticsPro/target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.2.0:testResources[m [1m(default-testResources)[m @ [36mPhoneticsPro[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] skip non existing resourceDirectory /home/yeferson/PhoneticsPro_Software2/PhoneticsPro/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:testCompile[m [1m(default-testCompile)[m @ [36mPhoneticsPro[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 1 source file to /home/yeferson/PhoneticsPro_Software2/PhoneticsPro/target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m<<< [0;32mspring-boot-maven-plugin:2.7.10:run[m [1m(default-cli)[0;1m < [0;1mtest-compile[m @ [36mPhoneticsPro[0;1m <<<[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:2.7.10:run[m [1m(default-cli)[m @ [36mPhoneticsPro[0;1m ---[m
+[[1;34mINFO[m] Attaching agents: []
+20:33:55.129 [Thread-0] DEBUG org.springframework.boot.devtools.restart.classloader.RestartClassLoader - Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@7861908f
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.10)
+
+2024-07-01 20:33:55.634  INFO 52040 --- [  restartedMain] u.e.e.P.PhoneticsProApplication          : Starting PhoneticsProApplication using Java 21.0.3 on instance-20240701-160800 with PID 52040 (/home/yeferson/PhoneticsPro_Software2/PhoneticsPro/target/classes started by yeferson in /home/yeferson/PhoneticsPro_Software2/PhoneticsPro)
+2024-07-01 20:33:55.636  INFO 52040 --- [  restartedMain] u.e.e.P.PhoneticsProApplication          : No active profile set, falling back to 1 default profile: "default"
+2024-07-01 20:33:55.722  INFO 52040 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-01 20:33:55.722  INFO 52040 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-01 20:33:56.807  INFO 52040 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-01 20:33:56.861  INFO 52040 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 3 JPA repository interfaces.
+2024-07-01 20:33:57.677  INFO 52040 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8094 (http)
+2024-07-01 20:33:57.691  INFO 52040 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-01 20:33:57.692  INFO 52040 --- [  restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.73]
+2024-07-01 20:33:57.779  INFO 52040 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-01 20:33:57.780  INFO 52040 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2057 ms
+2024-07-01 20:33:57.979  INFO 52040 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-01 20:33:58.500  INFO 52040 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-01 20:33:58.552  INFO 52040 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-01 20:33:58.602  INFO 52040 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-07-01 20:33:58.973  INFO 52040 --- [  restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-07-01 20:33:59.099  INFO 52040 --- [  restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2024-07-01 20:33:59.729  INFO 52040 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-01 20:33:59.739  INFO 52040 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-01 20:34:00.576  WARN 52040 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-01 20:34:00.864  INFO 52040 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-01 20:34:01.084  INFO 52040 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8094 (http) with context path ''
+2024-07-01 20:34:01.438  INFO 52040 --- [  restartedMain] u.e.e.P.PhoneticsProApplication          : Started PhoneticsProApplication in 6.292 seconds (JVM running for 6.831)
+2024-07-01 20:34:05.610  INFO 52040 --- [nio-8094-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-01 20:34:05.610  INFO 52040 --- [nio-8094-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-01 20:34:05.613  INFO 52040 --- [nio-8094-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-07-01 20:34:05.707 DEBUG 52040 --- [nio-8094-exec-1] org.hibernate.SQL                        : select word0_.id_word as id_word1_2_, word0_.term as term2_2_, word0_.transcription as transcri3_2_ from word word0_
+2024-07-01 20:34:05.978 DEBUG 52040 --- [nio-8094-exec-4] org.hibernate.SQL                        : select word0_.id_word as id_word1_2_, word0_.term as term2_2_, word0_.transcription as transcri3_2_ from word word0_
+2024-07-01 20:34:08.600 DEBUG 52040 --- [nio-8094-exec-2] org.hibernate.SQL                        : select attempt0_.id_attempt as id_attem1_0_, attempt0_.correct_attempt as correct_2_0_, attempt0_.date_attempt as date_att3_0_, attempt0_.id_user as id_user5_0_, attempt0_.total_attempt as total_at4_0_ from attempt attempt0_
+2024-07-01 20:34:08.614 DEBUG 52040 --- [nio-8094-exec-2] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.623 DEBUG 52040 --- [nio-8094-exec-2] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.626 DEBUG 52040 --- [nio-8094-exec-2] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.629 DEBUG 52040 --- [nio-8094-exec-2] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.632 DEBUG 52040 --- [nio-8094-exec-2] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.814 DEBUG 52040 --- [nio-8094-exec-3] org.hibernate.SQL                        : select attempt0_.id_attempt as id_attem1_0_, attempt0_.correct_attempt as correct_2_0_, attempt0_.date_attempt as date_att3_0_, attempt0_.id_user as id_user5_0_, attempt0_.total_attempt as total_at4_0_ from attempt attempt0_
+2024-07-01 20:34:08.835 DEBUG 52040 --- [nio-8094-exec-3] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.840 DEBUG 52040 --- [nio-8094-exec-3] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.842 DEBUG 52040 --- [nio-8094-exec-3] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.846 DEBUG 52040 --- [nio-8094-exec-3] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?
+2024-07-01 20:34:08.848 DEBUG 52040 --- [nio-8094-exec-3] org.hibernate.SQL                        : select users0_.id_user as id_user1_1_0_, users0_.email as email2_1_0_, users0_.name_user as name_use3_1_0_, users0_.password_user as password4_1_0_ from users users0_ where users0_.id_user=?

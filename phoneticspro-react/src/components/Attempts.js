@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -18,7 +19,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 const Attempts = () => {
@@ -89,9 +91,13 @@ const Attempts = () => {
   const startOfWeek = getStartOfWeek(now);
   const endOfWeek = getEndOfWeek(now);
 
+  //console.log("startOfWeek:", formatoFecha(startOfWeek));
+  //console.log("endOfWeek:", formatoFecha(endOfWeek));
+
   const dataThisWeek = listaPorId.filter((intento) => {
-    const intentoDate = new Date(intento.date_attempt);
-    return intentoDate >= startOfWeek && intentoDate <= endOfWeek;
+    const intentoDate = new Date(intento.date_attempt).toISOString().split('T')[0];
+    //console.log("intentoDate:", intentoDate);
+    return intentoDate >= formatoFecha(startOfWeek) && intentoDate <= formatoFecha(endOfWeek);
   });
 
   const daysOfWeek = [
@@ -104,16 +110,19 @@ const Attempts = () => {
     "Domingo",
   ];
 
-  const weeklyData = daysOfWeek.map((day) => {
+  const weeklyData = daysOfWeek.map((day, index) => {
     const date = new Date(startOfWeek);
-    date.setDate(date.getDate() + daysOfWeek.indexOf(day));
-    const dateString = formatoFecha(date);
+    date.setDate(date.getDate() + index);
+    const dateString = date.toISOString().split('T')[0];
 
     const dailyAttempts = dataThisWeek.find(
-      (int) => formatoFecha(int.date_attempt) === dateString
+      (int) => new Date(int.date_attempt).toISOString().split('T')[0] === dateString
     ) || { total_attempt: 0, correct_attempt: 0 };
     dailyAttempts.wrong_attempt =
       dailyAttempts.total_attempt - dailyAttempts.correct_attempt;
+
+    //console.log(`Day: ${day}, DateString: ${dateString}, DailyAttempts:`, dailyAttempts);
+
     return dailyAttempts;
   });
 
