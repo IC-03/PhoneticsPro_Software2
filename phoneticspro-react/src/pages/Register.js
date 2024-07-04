@@ -10,11 +10,11 @@ const Register = () => {
 
   const [usuario, setUsuario] = useState({
     email: "",
-    password_user: "",
-    name_user: "",
+    passwordUser: "",
+    nameUser: "",
   });
 
-  const { name_user, email, password_user } = usuario;
+  const { nameUser, email, passwordUser } = usuario;
 
   const onChange = (e) => {
     setUsuario({
@@ -25,9 +25,9 @@ const Register = () => {
 
   const register = async () => {
     const data = {
-      name_user: usuario.name_user,
+      nameUser: usuario.nameUser,
       email: usuario.email,
-      password_user: usuario.password_user,
+      passwordUser: usuario.passwordUser,
     };
     const response = await APIInvoke.invokePOST(`api/Users/`, data);
     const mensaje = response.msg;
@@ -50,8 +50,8 @@ const Register = () => {
       });
     } else {
       const msg = "El usuario fue creado correctamente.";
-      sessionStorage.setItem("id_user", response.id_user);
-      sessionStorage.setItem("name_user", response.name_user);
+      sessionStorage.setItem("id_user", response.id);
+      sessionStorage.setItem("name_user", response.nameUser);
       navigate("/");
       swal({
         title: "Información",
@@ -70,8 +70,8 @@ const Register = () => {
 
       setUsuario({
         email: "",
-        password_user: "",
-        name_user: "",
+        passwordUser: "",
+        nameUser: "",
       });
     }
   };
@@ -103,9 +103,9 @@ const Register = () => {
               type="text"
               className="form-control"
               placeholder="NombreUsuario"
-              id="name_user"
-              name="name_user"
-              value={name_user}
+              id="nameUser"
+              name="nameUser"
+              value={nameUser}
               onChange={onChange}
               required
             />
@@ -132,11 +132,11 @@ const Register = () => {
             <div className="password-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
-                id="password_user"
-                name="password_user"
+                id="passwordUser"
+                name="passwordUser"
                 className="form-control"
                 placeholder="************"
-                value={password_user}
+                value={passwordUser}
                 onChange={onChange}
                 required
               />

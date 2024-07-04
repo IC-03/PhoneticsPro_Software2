@@ -207,13 +207,12 @@ const Game = () => {
   const SendAttempt = async () => {
     const user = await APIInvoke.invokeGET(`api/Users/list/${sessionStorage.getItem('id_user')}`);
 
-
     const data = {
       total_attempt: correctWordsCount + incorrectWordsCount,
       correct_attempt: correctWordsCount,
       date_attempt: getDate_attempt(),
-      id_user: {
-        id_user: user.id_user,
+      user: {
+        id: user.id,
         email: user.email,
         password_user: user.password_user,
         name_user: user.name_user
@@ -233,8 +232,8 @@ const Game = () => {
       total_attempt: correctWordsCount + incorrectWordsCount,
       correct_attempt: correctWordsCount,
       date_attempt: getDate_attempt(),
-      id_user: {
-        id_user: user.id_user,
+      user: {
+        id: user.id,
         email: user.email,
         password_user: user.password_user,
         name_user: user.name_user

@@ -67,8 +67,8 @@ const Login = () => {
         });
       } else {
         //guardamos en el localstorage
-        sessionStorage.setItem('id_user', response.Usuario.id_user)
-        sessionStorage.setItem('name_user', response.Usuario.name_user)
+        sessionStorage.setItem('id_user', response.Usuario.id)
+        sessionStorage.setItem('name_user', response.Usuario.nameUser)
 
 
         //redireccionamos al home la pagina principal

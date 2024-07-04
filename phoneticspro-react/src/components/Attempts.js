@@ -9,7 +9,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -19,14 +18,12 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  Filler
+  Legend
 );
 
 const Attempts = () => {
   const [listaPorId, setListaPorId] = useState([]);
   let id = sessionStorage.getItem("id_user");
-  id = parseInt(id);
 
   useEffect(() => {
     const fetchAndCombineAttempts = async () => {
@@ -35,7 +32,7 @@ const Attempts = () => {
         const data = await response.json();
 
         const filteredData = data.filter(
-          (intento) => id === intento.id_user.id_user
+          (intento) => id === intento.user.id
         );
 
         let combinedList = [...filteredData];
@@ -77,27 +74,28 @@ const Attempts = () => {
 
   function getStartOfWeek(date) {
     const currentDate = new Date(date);
-    const day = currentDate.getDay();
-    const diff = currentDate.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-    return new Date(currentDate.setDate(diff));
+    const day = currentDate.getUTCDay();
+    const diff = currentDate.getUTCDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
+    const startOfWeek = new Date(currentDate.setUTCDate(diff));
+    startOfWeek.setUTCHours(0, 0, 0, 0); // set time to the start of the day
+    return startOfWeek;
   }
 
   function getEndOfWeek(date) {
     const startOfWeek = getStartOfWeek(date);
-    return new Date(startOfWeek.setDate(startOfWeek.getDate() + 6));
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setUTCDate(endOfWeek.getUTCDate() + 6);
+    endOfWeek.setUTCHours(23, 59, 59, 999); // set time to the end of the day
+    return endOfWeek;
   }
 
   const now = new Date();
   const startOfWeek = getStartOfWeek(now);
   const endOfWeek = getEndOfWeek(now);
 
-  //console.log("startOfWeek:", formatoFecha(startOfWeek));
-  //console.log("endOfWeek:", formatoFecha(endOfWeek));
-
   const dataThisWeek = listaPorId.filter((intento) => {
-    const intentoDate = new Date(intento.date_attempt).toISOString().split('T')[0];
-    //console.log("intentoDate:", intentoDate);
-    return intentoDate >= formatoFecha(startOfWeek) && intentoDate <= formatoFecha(endOfWeek);
+    const intentoDate = new Date(intento.date_attempt);
+    return intentoDate >= startOfWeek && intentoDate <= endOfWeek;
   });
 
   const daysOfWeek = [
@@ -112,17 +110,14 @@ const Attempts = () => {
 
   const weeklyData = daysOfWeek.map((day, index) => {
     const date = new Date(startOfWeek);
-    date.setDate(date.getDate() + index);
-    const dateString = date.toISOString().split('T')[0];
+    date.setUTCDate(startOfWeek.getUTCDate() + index);
+    const dateString = formatoFecha(date);
 
     const dailyAttempts = dataThisWeek.find(
-      (int) => new Date(int.date_attempt).toISOString().split('T')[0] === dateString
+      (int) => formatoFecha(int.date_attempt) === dateString
     ) || { total_attempt: 0, correct_attempt: 0 };
     dailyAttempts.wrong_attempt =
       dailyAttempts.total_attempt - dailyAttempts.correct_attempt;
-
-    //console.log(`Day: ${day}, DateString: ${dateString}, DailyAttempts:`, dailyAttempts);
-
     return dailyAttempts;
   });
 
@@ -166,17 +161,6 @@ const Attempts = () => {
 
   return (
     <div>
-      {/* 
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {listaPorId.map((intento, index) => (
-          <li key={index}>
-            {" "}
-            <b>{formatoFecha(intento.date_attempt)}:</b> <br />
-            Intentos totales: {intento.total_attempt}, <br />
-            Intentos correctos: {intento.correct_attempt}.{" "}
-          </li>
-        ))}
-      </ul>*/}
       <div>
         <Line data={data} options={options} />
       </div>

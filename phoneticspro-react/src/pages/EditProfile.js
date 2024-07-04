@@ -7,13 +7,13 @@ import swal from "sweetalert";
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const id_user_ = sessionStorage.getItem("id_user");
+  const id_ = sessionStorage.getItem("id_user");
 
   const [BDusuario, setBDUsuario] = useState({
-    id_user: "",
+    id: "",
     email: "",
-    name_user: "",
-    password_user: "",
+    nameUser: "",
+    passwordUser: "",
   });
 
   const [usuario, setUsuario] = useState({
@@ -37,9 +37,10 @@ const EditProfile = () => {
     const cargarUsuario = async () => {
       try {
         const response = await APIInvoke.invokeGET(
-          `api/Users/list/${id_user_}`
+          `api/Users/list/${id_}`
         );
         if (response) {
+          console.log(response)
           setBDUsuario(response);
         } else {
           throw new Error("No se pudo obtener el usuario");
@@ -49,13 +50,13 @@ const EditProfile = () => {
       }
     };
 
-    if (id_user_ >= 0) {
+    if (id_ !== undefined) {
       cargarUsuario();
     }
-  }, [id_user_]);
+  }, [id_]);
 
   const confirmarCambios = async (password) => {
-    if (BDusuario.password_user === password) {
+    if (BDusuario.passwordUser === password) {
       // Verificar si no se han realizado cambios
       if (
         usuario.new_email === "" &&
@@ -70,14 +71,14 @@ const EditProfile = () => {
         usuario.new_email = BDusuario.email;
       }
       if (usuario.new_password_user === "") {
-        usuario.new_password_user = BDusuario.password_user;
+        usuario.new_password_user = BDusuario.passwordUser;
       }
       if (usuario.new_name_user === "") {
-        usuario.new_name_user = BDusuario.name_user;
+        usuario.new_name_user = BDusuario.nameUser;
       }
 
       const data = {
-        id_user: BDusuario.id_user,
+        id: BDusuario.id,
         email: usuario.new_email,
         password_user: usuario.new_password_user,
         name_user: usuario.new_name_user,
@@ -88,7 +89,8 @@ const EditProfile = () => {
       }
 
       const response = await APIInvoke.invokePUT(`api/Users/`, data);
-      if (response.id === usuario.id_user) {
+
+      if (response.id === BDusuario.id) {
         swal("Éxito", "Perfil editado correctamente", "success");
         navigate("/");
       } else {
@@ -191,12 +193,11 @@ const EditProfile = () => {
   };
 
   const Borrado = async (password) => {
-    if (BDusuario.password_user === password) {
-      const response = await APIInvoke.invokeDELETE(`api/Users/${id_user_}`);
+    if (BDusuario.passwordUser === password) {
+      const response = await APIInvoke.invokeDELETE(`api/Users/${id_}`);
       navigate("/");
-      sessionStorage.clear();
 
-      if (response.success) {
+      if (response.id === sessionStorage.getItem("id_user")) {
         swal({
           title: "Borrado Exitoso",
           text: "Tu cuenta ha sido borrada satisfactoriamente.",
@@ -211,6 +212,7 @@ const EditProfile = () => {
             },
           },
         });
+        sessionStorage.clear();
       } else {
         const msg = "Ha ocurrido un error al borrar la cuenta";
         swal({
@@ -308,7 +310,7 @@ const EditProfile = () => {
             <input
               type="text"
               className="form-control"
-              placeholder={BDusuario.name_user}
+              placeholder={BDusuario.nameUser}
               id="new_name_user"
               name="new_name_user"
               value={new_name_user}
