@@ -18,12 +18,11 @@ const EditProfile = () => {
 
   const [usuario, setUsuario] = useState({
     new_email: "",
-    old_password_user: "",
     new_name_user: "",
     new_password_user: "",
   });
 
-  const { new_email, old_password_user, new_name_user, new_password_user } =
+  const { new_email, new_name_user, new_password_user } =
     usuario;
 
   const onChange = (e) => {
@@ -328,19 +327,6 @@ const EditProfile = () => {
               id="new_email"
               name="new_email"
               value={new_email}
-              onChange={onChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="old_password_user" className="form-label">
-              Contraseña vieja
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="old_password_user"
-              name="old_password_user"
-              value={old_password_user}
               onChange={onChange}
             />
           </div>

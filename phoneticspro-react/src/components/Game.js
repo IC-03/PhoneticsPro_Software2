@@ -27,9 +27,17 @@ const Game = () => {
   const [failedAttempts, setFailedAttempts] = useState([]);
   const [showFailedAttempts, setShowFailedAttempts] = useState(false);
 
+  // Verificar si el usuario ha iniciado sesión
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem("id_user");
+    setIsUserLoggedIn(!!userId);
+  }, []);
+
   const handleWordAttempt = (word) => {
-      setFailedAttempts((prevAttempts) => [...prevAttempts, word]);
-  }
+    setFailedAttempts((prevAttempts) => [...prevAttempts, word]);
+  };
 
   useEffect(() => {
     const fetchWords = async () => {
@@ -48,7 +56,6 @@ const Game = () => {
   }, []);
 
   const handleTimeOptionClick = (selectedTime) => {
-    
     if (selectedTime.endsWith("s")) {
       setGameMode("against the clock");
       setTimeLimit(parseInt(selectedTime.slice(0, -1)));
@@ -67,7 +74,7 @@ const Game = () => {
       );
       return;
     }
-    console.log("Starting game");
+    //console.log("Starting game");
     clearInterval(timerRef.current);
     setElapsedTime(0);
     setWordsTyped(0);
@@ -84,14 +91,14 @@ const Game = () => {
   };
 
   const startChronometer = () => {
-    console.log("Starting chronometer");
+    //console.log("Starting chronometer");
     timerRef.current = setInterval(() => {
       setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
     }, 1000);
   };
 
   const startTimer = () => {
-    console.log("Starting timer");
+    //console.log("Starting timer");
     timerRef.current = setInterval(() => {
       setElapsedTime((prevElapsedTime) => {
         if (prevElapsedTime + 1 >= timeLimit) {
@@ -104,7 +111,7 @@ const Game = () => {
   };
 
   const endGame = () => {
-    console.log("Ending game");
+    //console.log("Ending game");
     clearInterval(timerRef.current);
     setIsGameActive(false);
   };
@@ -116,14 +123,23 @@ const Game = () => {
       setResultWords(
         `Palabras correctas: ${correctWordsCount} / ${wordsTyped}\nPalabras incorrectas: ${incorrectWordsCount} / ${wordsTyped}`
       );
-      console.log(`Result Time: ${result}`);
-      console.log(
-        `Result Words: Palabras correctas: ${correctWordsCount} / ${wordsTyped}, Palabras incorrectas: ${incorrectWordsCount} / ${wordsTyped}`
-      );
+      //console.log(`Result Time: ${result}`);
+      //console.log(
+      //`Result Words: Palabras correctas: ${correctWordsCount} / ${wordsTyped}, Palabras incorrectas: ${incorrectWordsCount} / ${wordsTyped}`
+      //);
       setShowResults(true);
-      setShowFailedAttempts(true);
+      if (isUserLoggedIn) {
+        setShowFailedAttempts(true);
+      }
     }
-  }, [isGameActive, correctWordsCount, elapsedTime, incorrectWordsCount, wordsTyped]);
+  }, [
+    isGameActive,
+    correctWordsCount,
+    elapsedTime,
+    incorrectWordsCount,
+    wordsTyped,
+    isUserLoggedIn,
+  ]);
 
   const displayNextWord = () => {
     if (showFailedAttempts && failedAttempts.length > 0) {
@@ -132,7 +148,7 @@ const Game = () => {
     } else if (words.length > 0) {
       const randomIndex = Math.floor(Math.random() * words.length);
       setCurrentWord(words[randomIndex]);
-      console.log(`New word: ${words[randomIndex]}`);
+      //console.log(`New word: ${words[randomIndex]}`);
     }
   };
 
@@ -155,17 +171,17 @@ const Game = () => {
   const processInput = () => {
     const typedWord = inputValue.trim().toLowerCase();
     const randomWord = currentWord.trim().toLowerCase();
-    console.log(`Typed: ${typedWord}, Current: ${randomWord}`);
+    //console.log(`Typed: ${typedWord}, Current: ${randomWord}`);
     if (typedWord === randomWord) {
       setCorrectWordsCount((prevCount) => prevCount + 1);
-      console.log(`Correct words count: ${correctWordsCount + 1}`);
+      //console.log(`Correct words count: ${correctWordsCount + 1}`);
     } else {
       handleWordAttempt(randomWord);
       setIncorrectWordsCount((prevCount) => prevCount + 1);
-      console.log(`Incorrect words count: ${incorrectWordsCount + 1}`);
+      //console.log(`Incorrect words count: ${incorrectWordsCount + 1}`);
     }
     setWordsTyped((prevCount) => prevCount + 1);
-    console.log(`Words typed: ${wordsTyped + 1}`);
+    //console.log(`Words typed: ${wordsTyped + 1}`);
     setInputValue("");
 
     if (gameMode === "take your time" && wordsTyped + 1 >= timeLimit) {
@@ -199,34 +215,41 @@ const Game = () => {
   const getDate_attempt = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Se agrega 1 porque los meses van de 0 a 11
-    const day = currentDate.getDate().toString().padStart(2, '0');
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Se agrega 1 porque los meses van de 0 a 11
+    const day = currentDate.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
-  }
+  };
 
   const SendAttempt = async () => {
-    const user = await APIInvoke.invokeGET(`api/Users/list/${sessionStorage.getItem('id_user')}`);
+    if (isUserLoggedIn) {
+      const user = await APIInvoke.invokeGET(
+        `api/Users/list/${sessionStorage.getItem("id_user")}`
+      );
 
-    const data = {
-      total_attempt: correctWordsCount + incorrectWordsCount,
-      correct_attempt: correctWordsCount,
-      date_attempt: getDate_attempt(),
-      user: {
-        id: user.id,
-        email: user.email,
-        password_user: user.password_user,
-        name_user: user.name_user
-      }
-    };
+      const data = {
+        total_attempt: correctWordsCount + incorrectWordsCount,
+        correct_attempt: correctWordsCount,
+        date_attempt: getDate_attempt(),
+        user: {
+          id: user.id,
+          email: user.email,
+          password_user: user.password_user,
+          name_user: user.name_user,
+        },
+      };
 
-    await APIInvoke.invokePOST(`api/Attempt/`, data);
+      await APIInvoke.invokePOST(`api/Attempt/`, data);
 
-    window.location.reload();
+      window.location.reload();
+    } else {
+      window.location.reload();
+    }
   };
 
   const startCorrection = async () => {
-    const user = await APIInvoke.invokeGET(`api/Users/list/${sessionStorage.getItem('id_user')}`);
-
+    const user = await APIInvoke.invokeGET(
+      `api/Users/list/${sessionStorage.getItem("id_user")}`
+    );
 
     const data = {
       total_attempt: correctWordsCount + incorrectWordsCount,
@@ -236,8 +259,8 @@ const Game = () => {
         id: user.id,
         email: user.email,
         password_user: user.password_user,
-        name_user: user.name_user
-      }
+        name_user: user.name_user,
+      },
     };
 
     await APIInvoke.invokePOST(`api/Attempt/`, data);
@@ -370,7 +393,10 @@ const Game = () => {
         <div
           className="container mt-4 mb-4 p-2"
           id="game-container"
-          style={{ backgroundColor: "rgb(204, 204, 204)", borderRadius: "10px" }}
+          style={{
+            backgroundColor: "rgb(204, 204, 204)",
+            borderRadius: "10px",
+          }}
         >
           <div className="text-center" id="game">
             <div className="p-2" id="game-timer">
@@ -385,7 +411,6 @@ const Game = () => {
             </div>
 
             <CurrentWordAudio currentWord={currentWord} />
-
 
             <input
               type="text"
@@ -413,40 +438,34 @@ const Game = () => {
             <h2>Resultados</h2>
             <p id="result-time">{resultTime}</p>
             <p id="result-words">{resultWords}</p>
-            
-            {/* Experimental */}
-            {failedAttempts.length > 0 && (
+
+            {isUserLoggedIn && failedAttempts.length > 0 && (
               <div>
-                
                 <h3>Intentos Fallidos</h3>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
+                <ul style={{ listStyle: "none", padding: 0 }}>
                   {failedAttempts.map((word, index) => (
                     <li key={index}>{word}</li>
                   ))}
                 </ul>
-                <button 
-                  style={{margin: 10}} 
-                  className="btn btn-danger" 
-                  onClick={() => {
-                      startCorrection();
-                    }}>
-                    Corregir Intentos
+                <button
+                  style={{ margin: 10 }}
+                  className="btn btn-danger"
+                  onClick={startCorrection}
+                >
+                  Corregir Intentos
                 </button>
               </div>
             )}
-            
+
             <button
               className="btn btn-success"
               id="restart-button"
-              onClick={() => {
-                SendAttempt();
-              }}
+              onClick={SendAttempt}
             >
-              Jugar de nuevo
+              {isUserLoggedIn
+                ? "Nuevo Intento"
+                : "Jugar de Nuevo"}
             </button>
-
-            
-            
           </div>
         </div>
       )}

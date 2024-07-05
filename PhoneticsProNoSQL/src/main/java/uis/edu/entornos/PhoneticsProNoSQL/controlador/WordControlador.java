@@ -20,32 +20,36 @@ import org.springframework.web.bind.annotation.RestController;
 import uis.edu.entornos.PhoneticsProNoSQL.modelo.Word;
 import uis.edu.entornos.PhoneticsProNoSQL.servicio.WordServicio;
 
-/**
- *
- * @author Carlos
- */
+//Swagger
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/Word")
+@Api(value = "Registro de las palabras y su transcripcion", tags={"Palabras"})
 public class WordControlador {
     
     @Autowired
     WordServicio wordServicio;
     
     //Listar
+    @ApiOperation(value = "Listar todas las palabras", response = List.class)
     @GetMapping("/list")
     public List<Word> listarWord(){
         return wordServicio.getWords();
     }
     
     //Buscar por ID
+    @ApiOperation(value = "Obtener una palabra por el Id", response = Word.class)
     @GetMapping("/list/{id}")
     public Word buscarWord(@PathVariable String id){
         return wordServicio.getWordById(id);
     }
     
     //Crear
+    @ApiOperation(value = "Agregar una nueva palabra", response = Word.class)
     @PostMapping("/")
     public ResponseEntity<Word> crearWord(@RequestBody Word word){
         Word obj = wordServicio.createWord(word);
@@ -54,6 +58,7 @@ public class WordControlador {
     }
     
     //Actualizar
+    @ApiOperation(value = "Actualizar una palabra existente", response = Word.class)
     @PutMapping("/")
     public ResponseEntity<Word> actualizar(@RequestBody Word word){
         Word obj = wordServicio.getWordById(word.getId());
@@ -69,6 +74,7 @@ public class WordControlador {
     
     
     //Borrar
+    @ApiOperation(value = "Borrar una palabra por su ID", response = ResponseEntity.class)
     @DeleteMapping("/{id}")
     public ResponseEntity<Word> borrar(@PathVariable String id){
         Word obj = wordServicio.getWordById(id);

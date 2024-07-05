@@ -11,10 +11,11 @@ const Register = () => {
   const [usuario, setUsuario] = useState({
     email: "",
     passwordUser: "",
+    confirmPassword: "",
     nameUser: "",
   });
 
-  const { nameUser, email, passwordUser } = usuario;
+  const { nameUser, email, passwordUser, confirmPassword } = usuario;
 
   const onChange = (e) => {
     setUsuario({
@@ -24,6 +25,71 @@ const Register = () => {
   };
 
   const register = async () => {
+    if (nameUser.length < 3 ||
+      nameUser.length > 20 ||
+      /\s/.test(nameUser) ||
+      /[^a-zA-Z0-9]/.test(nameUser)
+    ) {
+      swal({
+        title: "Error",
+        text: "El nombre de usuario no cumple con los estándares.",
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Ok",
+            value: true,
+            visible: true,
+            className: "btn btn-danger",
+            closeModal: true,
+          },
+        },
+      });
+      return;
+    }
+
+    if (
+      passwordUser.length < 8 ||
+      passwordUser.length > 20 ||
+      /\s/.test(passwordUser) ||
+      /[^a-zA-Z0-9]/.test(passwordUser)
+    ) {
+      const msg = "La contraseña no cumple con los estándares planteados.";
+      swal({
+        title: "Error",
+        text: msg,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Ok",
+            value: true,
+            visible: true,
+            className: "btn btn-danger",
+            closeModal: true,
+          },
+        },
+      });
+      return;
+    }
+
+    if (passwordUser !== confirmPassword) {
+      const msg = "Las contraseñas no coinciden.";
+      swal({
+        title: "Error",
+        text: msg,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Ok",
+            value: true,
+            visible: true,
+            className: "btn btn-danger",
+            closeModal: true,
+          },
+        },
+      });
+      return;
+    }
+
     const data = {
       nameUser: usuario.nameUser,
       email: usuario.email,
@@ -71,6 +137,7 @@ const Register = () => {
       setUsuario({
         email: "",
         passwordUser: "",
+        confirmPassword: "",
         nameUser: "",
       });
     }
@@ -109,6 +176,12 @@ const Register = () => {
               onChange={onChange}
               required
             />
+            <div>
+              <small className="form-text text-muted">
+                Su nombre de usuario debe tener más de tres carácteres y menos de 20,
+                no debe contener espacios y/o carácteres especiales.
+              </small>
+            </div>
           </div>
           <div className="input-field mb-3">
             <label htmlFor="email" className="form-label">
@@ -149,13 +222,13 @@ const Register = () => {
             </div>
             <div>
               <small className="form-text text-muted">
-                Su contraseña debe tener entre 8 y 20 caracteres entre
-                letras y números, no deben haber espacios, caracteres
-                especiales ni emojis.
+                Su contraseña debe tener entre 8 y 20 caracteres, solo letras y
+                números, no deben haber espacios, caracteres especiales ni
+                emojis.
               </small>
             </div>
           </div>
-          <div className=" input-field mb-3">
+          <div className="input-field mb-3">
             <label htmlFor="confirmar" className="form-label">
               Confirmar contraseña
             </label>
@@ -163,8 +236,10 @@ const Register = () => {
               type="password"
               className="form-control"
               placeholder="************"
-              id="confirmar"
-              name="confirmar"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={onChange}
               required
             />
           </div>

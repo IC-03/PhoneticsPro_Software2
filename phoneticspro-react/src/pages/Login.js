@@ -134,20 +134,8 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              defaultValue
-              id="flexCheckDefault"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault">
-              Recordar contraseña
-            </label>
-          </div>
-
           <button
-            className="btn btn-block btn-success text-center mt-2" /*onClick={validarLogin}*/
+            className="btn btn-block btn-success text-center mt-2"
           >
             Entrar
           </button>

@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -18,7 +19,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 const Attempts = () => {
@@ -161,6 +163,17 @@ const Attempts = () => {
 
   return (
     <div>
+      {/* 
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {listaPorId.map((intento, index) => (
+          <li key={index}>
+            {" "}
+            <b>{formatoFecha(intento.date_attempt)}:</b> <br />
+            Intentos totales: {intento.total_attempt}, <br />
+            Intentos correctos: {intento.correct_attempt}.{" "}
+          </li>
+        ))}
+      </ul>*/}
       <div>
         <Line data={data} options={options} />
       </div>
